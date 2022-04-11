@@ -30,18 +30,9 @@ struct SideMenuView: View {
             .padding(.leading)
 
             ForEach(SideMenuViewModel.allCases, id: \.rawValue) { option in
-                HStack(spacing: 16) {
-                    Image(systemName: option.imageName)
-                        .font(.headline)
-                        .foregroundColor(.gray)
-                    
-                    Text(option.title)
-                        .font(.subheadline)
-                    
-                    Spacer()
+                if option == .profile {
+                    NavigationLink(destination: ProfileView, label: <#T##() -> _#>)
                 }
-                .frame(height: 40)
-                .padding(.horizontal)
             }
             
             Spacer()
@@ -52,5 +43,22 @@ struct SideMenuView: View {
 struct SideMenuView_Previews: PreviewProvider {
     static var previews: some View {
         SideMenuView()
+    }
+}
+
+extension SideMenuView {
+    var optionRowView: some View {
+        HStack(spacing: 16) {
+            Image(systemName: option.imageName)
+                .font(.headline)
+                .foregroundColor(.gray)
+            
+            Text(option.title)
+                .font(.subheadline)
+            
+            Spacer()
+        }
+        .frame(height: 40)
+        .padding(.horizontal)
     }
 }

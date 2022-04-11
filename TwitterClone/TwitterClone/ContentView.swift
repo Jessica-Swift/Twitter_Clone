@@ -12,18 +12,20 @@ struct ContentView: View {
     
     var body: some View {
         ZStack(alignment: .topLeading) {
+            
             MainTabView()
                 .navigationBarHidden(showMenu)
             
             if showMenu {
                 ZStack {
                     Color(.black)
-                        .opacity(0.25)
+                        .opacity(showMenu ? 0.25 : 0.0)
                 }.onTapGesture {
                     withAnimation(.easeInOut) {
                         showMenu = false
                     }
                 }
+                .ignoresSafeArea()
             }
             
             SideMenuView()
@@ -36,7 +38,9 @@ struct ContentView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
-                    showMenu.toggle()
+                    withAnimation(.easeInOut) {
+                        showMenu.toggle()
+                    }
                 } label: {
                     Circle()
                         .frame(width: 32, height: 32)
