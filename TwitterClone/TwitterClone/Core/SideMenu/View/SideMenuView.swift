@@ -29,21 +29,20 @@ struct SideMenuView: View {
             }
             .padding(.leading)
 
-            ForEach(SideMenuViewModel.allCases, id: \.rawValue) { option in
-                HStack(spacing: 16) {
-                    Image(systemName: option.imageName)
-                        .font(.headline)
-                        .foregroundColor(.gray)
+            ForEach(SideMenuViewModel.allCases, id: \.rawValue) { viewModel in
+                if viewModel == .profile {
+                    NavigationLink {
+                        ProfileView()
+                    } label: {
+                        SideMenuOptionRowView(viewModel: viewModel)
+                    }
+                } else if viewModel == .logout {
                     
-                    Text(option.title)
-                        .font(.subheadline)
-                    
-                    Spacer()
+                } else {
+                    SideMenuOptionRowView(viewModel: viewModel)
                 }
-                .frame(height: 40)
-                .padding(.horizontal)
             }
-            
+//
             Spacer()
         }
     }
@@ -54,3 +53,5 @@ struct SideMenuView_Previews: PreviewProvider {
         SideMenuView()
     }
 }
+
+
