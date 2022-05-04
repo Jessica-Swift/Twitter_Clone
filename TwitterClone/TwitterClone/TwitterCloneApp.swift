@@ -6,9 +6,14 @@
 //
 
 import SwiftUI
-
-@main
+import Firebase
+ 
 struct TwitterCloneApp: App {
+    
+    init() {
+        FirebaseApp.configure()
+    }
+    
     var body: some Scene {
         WindowGroup {
             NavigationView {
